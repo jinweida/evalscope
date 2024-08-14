@@ -92,7 +92,7 @@ class OpenaiPlugin(ApiPluginBase):
         output_tokens = None
         for response in responses:
             js = json.loads(response)
-            if js['object'] == 'chat.completion':
+            if 'object' in js and js['object'] == 'chat.completion':
                 for choice in js['choices']:
                     delta_contents[choice['index']] = [choice['message']['content']]     
                 input_tokens = js['usage']['prompt_tokens']
